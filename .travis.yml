@@ -16,9 +16,9 @@ before_script:
 
 script:
   - docker --version # print the version for logging
-  - docker build -t simple-node .
-  - docker tag simple-node isongjosiah/simple-node:latest
+  - docker build -t simple-node-env --build-arg NAME=${FAVORITE_FOOD} .
+  - docker tag simple-node-env isongjosiah/simple-node-env:latest
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push isongjosiah/simple-node
+  - docker push isongjosiah/simple-node-env
